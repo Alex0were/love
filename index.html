@@ -153,5 +153,50 @@
       }
     });
   </script>
+  <!-- Formulario oculto -->
+<div id="popupForm" style="
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  z-index: 9999;
+  box-shadow: 0 0 20px rgba(0,0,0,0.5);
+  font-family: sans-serif;
+">
+  <h3>Ingresa tus datos para continuar</h3>
+  <form id="formularioDatos">
+    <label>Nombre:</label><br>
+    <input type="text" name="nombre" required><br><br>
+    <label>Correo:</label><br>
+    <input type="email" name="correo" required><br><br>
+    <button type="submit">Enviar</button>
+  </form>
+</div>
+<script>
+  // Mostrar el formulario al hacer doble clic
+  document.addEventListener('dblclick', () => {
+    document.getElementById('popupForm').style.display = 'block';
+  });
+
+  // Manejo del formulario
+  document.getElementById('formularioDatos').addEventListener('submit', function (e) {
+    e.preventDefault();
+    const nombre = this.nombre.value;
+    const correo = this.correo.value;
+
+    alert(`Gracias, ${nombre}. Tus datos fueron registrados: ${correo}`);
+
+    // Aquí podrías enviar los datos a una base de datos si tienes un backend
+    // Por ejemplo, usando fetch() a una API de Google Sheets o PHP
+
+    document.getElementById('popupForm').style.display = 'none';
+    this.reset();
+  });
+</script>
+
 </body>
 </html>
